@@ -1,0 +1,14 @@
+{
+  "name": "pr-loan-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Loan Tracker Enterprise Portal",
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=client",
+    "build": "npm run build --workspace=client",
+    "preview": "npm run preview --workspace=client"
+  }
+}
