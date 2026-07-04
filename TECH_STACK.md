@@ -46,8 +46,7 @@ The workspace is organized as follows:
   │       │   ├── auth/              # JWT verification helpers
   │       │   ├── db/                # Supabase Client initialization client
   │       │   ├── domain/            # Lightweight interfaces
-  │       │   │   ├── User.ts
-  │       │   │   ├── Borrower.ts
+  │       │   │   ├── UserProfile.ts
   │       │   │   ├── Property.ts
   │       │   │   ├── Loan.ts
   │       │   │   ├── Offer.ts
@@ -55,11 +54,10 @@ The workspace is organized as follows:
   │       │   │   ├── Bank.ts
   │       │   │   └── LoanRules.ts   # Shared validation business rules
   │       │   ├── repositories/      # Relational database access modules (using supabase-js)
-  │       │   │   ├── UserRepository.ts
+  │       │   │   ├── UserProfileRepository.ts
   │       │   │   ├── LoanRepository.ts
   │       │   │   ├── OfferRepository.ts
   │       │   │   ├── PaymentRepository.ts
-  │       │   │   ├── BorrowerRepository.ts
   │       │   │   ├── PropertyRepository.ts
   │       │   │   ├── NotificationRepository.ts
   │       │   │   └── AuditRepository.ts
@@ -102,9 +100,9 @@ The workspace is organized as follows:
           │   ├── Login.tsx          # Login & simulated OTP screens
           │   ├── Dashboard.tsx      # Main workspace portal routing
           │   ├── BorrowerPortal.tsx
-          │   ├── AgentPortal.tsx
-          │   ├── BankerPortal.tsx
-          │   └── PropertyPortal.tsx
+          │   ├── AgentPortal.tsx    # BankAgent dashboard
+          │   ├── PropertyPortal.tsx # PropertyOwner dashboard
+          │   └── AdminPortal.tsx    # System Admin dashboard
           ├── styles/
           │   └── main.css           # CSS entry & Tailwind styles
           ├── utils/
