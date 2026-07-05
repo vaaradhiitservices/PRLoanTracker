@@ -5,8 +5,8 @@ export default function AdminPortal() {
   const profile = useAuthStore(state => state.profile);
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div>
+      <div className="hidden md:block mb-6">
         <h3 className="text-xl font-bold">Admin System Console</h3>
         <p className="text-slate-400 text-xs mt-1">Welcome, System Admin {profile?.firstName}! Control core parameters and audit system events.</p>
       </div>
@@ -43,7 +43,7 @@ export default function AdminPortal() {
         </div>
       </div>
 
-      <div className="glass-panel p-6 rounded-xl border border-slate-800 flex flex-col justify-center items-center text-center py-12">
+      <div className="glass-panel p-6 rounded-xl border border-slate-800 flex flex-col justify-center items-center text-center py-12 mt-6">
         <Settings className="h-10 w-10 text-slate-600 mb-2" />
         <h4 className="text-sm font-semibold mb-1 text-slate-200">System is operational</h4>
         <p className="text-xs text-slate-500 max-w-sm">

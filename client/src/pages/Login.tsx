@@ -125,7 +125,7 @@ export default function Login() {
 
           <div className="space-y-4">
             {isSignUp && (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-xs text-slate-400 font-medium">First Name</label>
                   <div className="relative">

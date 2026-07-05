@@ -4,10 +4,18 @@ All AI coding agents working on the PR Loan Tracker project must adhere to the f
 
 ---
 
-## 1. UI & Styling Constraints
-*   **Mobile-First Responsive Layouts**: All CSS styling must be mobile-first. Write base Tailwind classes for mobile screen widths, and use responsive breakpoints (e.g. `md:`, `lg:`) to scale elements up for tablet/desktop viewing.
+## 1. UI & Styling Constraints: App-First Architecture
+Always design and implement user interfaces with an **App-First (Mobile-App-First)** mental model. Do not simply design for desktop and compress it; build for mobile touch/thumb navigation first, then adapt and expand for desktop.
+
+*   **Fixed Screen Shells**: The primary application layout must be locked to the viewport height (`h-screen` or `h-[dvh]` with `overflow-hidden`). The page should not bounce scroll. Only the inner body workspace (`main`) must be an independent scrollable pane.
+*   **Mobile Bottom Tab Navigation**:
+    *   On mobile screens, primary module switches (Dashboard, Properties, KYC, Profiles) must reside in a **fixed bottom tab bar** for easy thumb access.
+    *   Do not force users to open hamburger side drawers to navigate between core views. Side drawers must be reserved only for secondary settings (e.g. active role toggling, signing out).
+*   **Mobile Bottom Action Sheets**:
+    *   When launching forms, creation actions, or upload modules (like adding a property or uploading KYC), use slide-up **Bottom Sheets** (drawer panels anchored to the bottom viewport) instead of centered desktop popup modals.
+*   **Card-Based Lists**:
+    *   Convert standard relational tables (`<table>` structures) into scrollable touch-friendly cards on mobile viewports. Row tables must only be exposed on desktop (`md:` and above).
 *   **Design Tokens System**: Adhere to the design system. Use HSL styling tokens mapped in [tailwind.config.js](file:///e:/Metrolabs/repos/PRLoanTracker/client/tailwind.config.js) (like `border-border`, `bg-background`) rather than introducing arbitrary color codes.
-*   **Rich Aesthetics**: Maintain dark mode HSL configurations, glassmorphic panels, and smooth micro-animations.
 
 ---
 

@@ -5,8 +5,8 @@ export default function AgentPortal() {
   const profile = useAuthStore(state => state.profile);
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div>
+      <div className="hidden md:block mb-6">
         <h3 className="text-xl font-bold">Bank Agent Workspace</h3>
         <p className="text-slate-400 text-xs mt-1">Welcome back, {profile?.firstName || 'User'}! Review borrower profiles and submit loan logins.</p>
       </div>
@@ -44,7 +44,7 @@ export default function AgentPortal() {
       </div>
 
       {/* Main Info Blocks */}
-      <div className="glass-panel p-6 rounded-xl border border-slate-800 flex flex-col justify-center items-center text-center py-12">
+      <div className="glass-panel p-6 rounded-xl border border-slate-800 flex flex-col justify-center items-center text-center py-12 mt-6">
         <Users className="h-10 w-10 text-slate-600 mb-2" />
         <h4 className="text-sm font-semibold mb-1 text-slate-200">No client data found</h4>
         <p className="text-xs text-slate-500 max-w-sm">

@@ -5,8 +5,8 @@ export default function BorrowerPortal() {
   const profile = useAuthStore(state => state.profile);
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div>
+      <div className="hidden md:block mb-6">
         <h3 className="text-xl font-bold">Borrower Dashboard</h3>
         <p className="text-slate-400 text-xs mt-1">Welcome back, {profile?.firstName || 'User'}! Track your loans and repayments here.</p>
       </div>
@@ -44,7 +44,7 @@ export default function BorrowerPortal() {
       </div>
 
       {/* Main Info Blocks */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div className="glass-panel p-6 rounded-xl border border-slate-800 space-y-4">
           <h4 className="text-sm font-semibold border-b border-slate-850 pb-2">My Profile Details</h4>
           <div className="space-y-2 text-xs">
