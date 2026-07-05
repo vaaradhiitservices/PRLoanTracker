@@ -145,3 +145,14 @@ $$ language plpgsql security definer;
 CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- Grant API access privileges to authenticated and anonymous roles
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.roles TO authenticated, service_role;
+GRANT SELECT ON public.roles TO anon;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.user_profiles TO authenticated, service_role;
+GRANT SELECT ON public.user_profiles TO anon;
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated, service_role;

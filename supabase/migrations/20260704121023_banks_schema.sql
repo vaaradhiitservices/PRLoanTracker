@@ -24,3 +24,8 @@ CREATE POLICY "Admins can manage banks" ON public.banks
     FOR ALL TO authenticated USING (
         public.has_role(auth.uid(), 'Admin')
     );
+
+-- Grant API access privileges to authenticated and anonymous roles
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.banks TO authenticated, service_role;
+GRANT SELECT ON public.banks TO anon;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated, service_role;

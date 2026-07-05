@@ -1,27 +1,41 @@
+import { useEffect } from 'react';
+import { supabase } from './utils/supabaseClient';
+import { useAuthStore } from './stores/useAuthStore';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import { Loader2 } from 'lucide-react';
+
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950 p-6">
-      <div className="glass-panel animate-glow max-w-md w-full rounded-2xl p-8 text-center border border-slate-800">
-        <div className="flex justify-center mb-4">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
-            ✓
-          </span>
-        </div>
-        <h1 className="text-3xl font-extrabold tracking-tight mb-2">
-          <span className="gradient-text">Loan Tracker Portal</span>
-        </h1>
-        <p className="text-slate-400 text-sm mb-6">
-          Vite + React + Tailwind CSS client scaffolding successfully initialized.
-        </p>
-        <div className="text-left text-xs bg-slate-900/50 rounded-lg p-4 border border-slate-800/80 font-mono text-slate-300">
-          <p className="text-blue-400 font-semibold mb-1">// Active Configuration:</p>
-          <p>• Database: Supabase PostgreSQL</p>
-          <p>• State Engine: Zustand + TanStack Query</p>
-          <p>• Router: React Router DOM</p>
-        </div>
+  const user = useAuthStore(state => state.user);
+  const initialized = useAuthStore(state => state.initialized);
+  const setSession = useAuthStore(state => state.setSession);
+
+  useEffect(() => {
+    // 1. Fetch initial active session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // 2. Subscribe to auth changes (sign in, sign out, token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [setSession]);
+
+  if (!initialized) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-400 gap-3">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        <span className="text-xs tracking-wider font-semibold">Initializing Portal Session...</span>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return user ? <Dashboard /> : <Login />;
 }
 
 export default App;
