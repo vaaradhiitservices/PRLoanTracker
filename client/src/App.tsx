@@ -4,6 +4,17 @@ import { useAuthStore } from './stores/useAuthStore';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { Loader2 } from 'lucide-react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Initialize the global query client for caching and mutations
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   const user = useAuthStore(state => state.user);
@@ -35,7 +46,11 @@ function App() {
     );
   }
 
-  return user ? <Dashboard /> : <Login />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      {user ? <Dashboard /> : <Login />}
+    </QueryClientProvider>
+  );
 }
 
 export default App;
